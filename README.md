@@ -52,7 +52,7 @@ npm test         # vitest unit tests
 Every push to `main` deploys automatically to GitHub Pages via
 [.github/workflows/deploy.yml](.github/workflows/deploy.yml): the workflow runs the unit tests,
 builds with `--base-href /portfolio-website/`, copies `index.html` to `404.html` so deep links
-(`/projects/...`) resolve, and publishes the artifact.
+(`/projects/...`) resolve, and publishes the output to the `gh-pages` branch, which Pages serves.
 
 Live at: https://seistrei.github.io/portfolio-website/
 
