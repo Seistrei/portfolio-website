@@ -97,7 +97,7 @@ export const PROJECTS: readonly Project[] = [
     ],
     links: [
       {
-        label: 'Public source on GitHub',
+        label: 'Source on GitHub',
         url: 'https://github.com/Seistrei/nykta-discord-bot',
       },
     ],
@@ -105,15 +105,15 @@ export const PROJECTS: readonly Project[] = [
   },
   {
     slug: 'overwatch-draft-mode',
-    name: 'OW2 Roguelite Draft Mode',
+    name: 'Overwatch Roguelite Draft Mode',
     category: 'Game Systems',
-    tagline: 'A 4v4 mode where teams draft escalating upgrades between every round',
-    summary: `A custom Overwatch 2 game mode: after every round, each team drafts three upgrades
+    tagline: 'A 2v2 mode where teams draft escalating upgrades between every round',
+    summary: `A custom Overwatch game mode: after every round, each team drafts three upgrades
       from a catalog of 41, ranging from rideable sky dragons to turret-building bots, and the
       picks persist as teams swap sides throughout the match. About 3,800 lines of OverPy
       compiling to 147 Workshop rules.`,
     overview: [
-      `A 4v4 attack/defense mode built on Assault. Captures are fast, respawns are faster, and
+      `A 2v2 attack/defense mode built on Assault. Captures are fast, respawns are faster, and
        when the point falls the teams swap sides and draft again. Each team picks a world upgrade
        (a large gameplay gadget), a utility upgrade, and a stat upgrade from an in-world,
        cursor-driven three-card menu. Every pick persists and stacks across rounds and side
@@ -143,14 +143,16 @@ export const PROJECTS: readonly Project[] = [
       `An adapted in-world cursor-menu engine renders the three-card draft interface with hover
        feedback, drawn from positioned world text.`,
     ],
-    tech: ['OverPy', 'Overwatch 2 Workshop', 'Docker', 'PowerShell', 'Git'],
+    tech: ['OverPy', 'Overwatch Workshop', 'Docker', 'PowerShell', 'Git'],
     stats: [
       { value: '41', label: 'draftable upgrades' },
       { value: '147', label: 'compiled Workshop rules' },
       { value: '~3.8k', label: 'lines of OverPy' },
       { value: '135', label: 'source rules' },
     ],
-    links: [],
+    links: [
+      { label: 'Source on GitHub', url: 'https://github.com/Seistrei/overwatch-roguelite' },
+    ],
     featured: false,
   },
   {

@@ -43,5 +43,5 @@ export const ABOUT_PARAGRAPHS: readonly string[] = [
   `Outside of work I build substantial personal projects. The largest is Nykta, an autonomous AI
    companion for Discord built as six event-driven microservices, with long-term memory, a
    permission-gated autonomy system, and an Angular monitoring dashboard. I also design complex
-   Overwatch 2 game modes, and I write fiction.`,
+   Overwatch game modes, and I write fiction.`,
 ];
