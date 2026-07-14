@@ -1,0 +1,79 @@
+<article class="detail section">
+  <div class="container">
+    <a class="back mono" routerLink="/" fragment="projects">
+      <app-icon name="arrow-left" [size]="15" />
+      all projects
+    </a>
+
+    <header class="head" appReveal>
+      <p class="mono category">{{ project().category }}</p>
+      <h1>{{ project().name }}</h1>
+      <p class="tagline">{{ project().tagline }}</p>
+    </header>
+
+    @if (project().stats.length) {
+      <ul class="stats card" appReveal="80ms">
+        @for (stat of project().stats; track stat.label) {
+          <li>
+            <span class="value">{{ stat.value }}</span>
+            <span class="mono label">{{ stat.label }}</span>
+          </li>
+        }
+      </ul>
+    }
+
+    <div class="prose" appReveal="150ms">
+      @for (paragraph of project().overview; track $index) {
+        <p>{{ paragraph }}</p>
+      }
+    </div>
+
+    <h2 class="mono sub" appReveal>// highlights</h2>
+    <ul class="highlights" appReveal="60ms">
+      @for (highlight of project().highlights; track $index) {
+        <li>{{ highlight }}</li>
+      }
+    </ul>
+
+    <h2 class="mono sub" appReveal>// built with</h2>
+    <ul class="chip-row" appReveal="60ms">
+      @for (tech of project().tech; track tech) {
+        <li class="chip">{{ tech }}</li>
+      }
+    </ul>
+
+    @if (project().links.length) {
+      <div class="links" appReveal>
+        @for (link of project().links; track link.url) {
+          <a class="btn btn-ghost" [href]="link.url" target="_blank" rel="noopener">
+            {{ link.label }}
+            <app-icon name="external" [size]="16" />
+          </a>
+        }
+      </div>
+    }
+
+    <nav class="pager" aria-label="More projects">
+      @if (neighbors().prev; as prev) {
+        <a class="card jump" [routerLink]="['/projects', prev.slug]">
+          <span class="mono dir">
+            <app-icon name="arrow-left" [size]="14" />
+            previous
+          </span>
+          <span class="name">{{ prev.name }}</span>
+        </a>
+      } @else {
+        <span aria-hidden="true"></span>
+      }
+      @if (neighbors().next; as next) {
+        <a class="card jump next" [routerLink]="['/projects', next.slug]">
+          <span class="mono dir">
+            next
+            <app-icon name="arrow-right" [size]="14" />
+          </span>
+          <span class="name">{{ next.name }}</span>
+        </a>
+      }
+    </nav>
+  </div>
+</article>

@@ -1,0 +1,31 @@
+<a
+  class="card project"
+  [class.featured]="project().featured"
+  [routerLink]="['/projects', project().slug]"
+>
+  <div class="top">
+    <span class="mono category">{{ project().category }}</span>
+    <app-icon name="arrow-right" [size]="20" />
+  </div>
+
+  <h3>{{ project().name }}</h3>
+  <p class="tagline">{{ project().tagline }}</p>
+  <p class="summary">{{ project().summary }}</p>
+
+  @if (project().featured && project().stats.length) {
+    <ul class="stats">
+      @for (stat of project().stats; track stat.label) {
+        <li>
+          <span class="value">{{ stat.value }}</span>
+          <span class="mono label">{{ stat.label }}</span>
+        </li>
+      }
+    </ul>
+  }
+
+  <ul class="chip-row">
+    @for (tech of techPreview(); track tech) {
+      <li class="chip">{{ tech }}</li>
+    }
+  </ul>
+</a>

@@ -1,0 +1,44 @@
+<section class="section" appSection="experience">
+  <div class="container">
+    <app-section-heading index="02." title="Where I've Worked" />
+
+    <ol class="timeline">
+      @for (job of experience; track job.role + job.period) {
+        <li class="entry" appReveal>
+          <header class="entry-head">
+            <h3>
+              {{ job.role }}
+              <span class="company">· {{ job.company }}</span>
+            </h3>
+            <p class="mono period">{{ job.period }}</p>
+          </header>
+
+          @for (group of job.groups; track $index) {
+            @if (group.title) {
+              <h4 class="mono group-title">{{ group.title }}</h4>
+            }
+            <ul class="bullets">
+              @for (bullet of group.bullets; track $index) {
+                <li>{{ bullet }}</li>
+              }
+            </ul>
+          }
+
+          <ul class="chip-row">
+            @for (tech of job.tech; track tech) {
+              <li class="chip">{{ tech }}</li>
+            }
+          </ul>
+        </li>
+      }
+    </ol>
+
+    <div class="card education" appReveal>
+      <div>
+        <h3>{{ education.school }}</h3>
+        <p class="degree">{{ education.degree }}</p>
+      </div>
+      <p class="mono period">{{ education.period }}</p>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,158 @@
+.detail {
+  padding-top: calc(var(--header-h) + clamp(2.5rem, 6vh, 4.5rem));
+}
+
+.container {
+  max-width: 50rem;
+}
+
+.back {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  color: var(--text-soft);
+  margin-bottom: 2.25rem;
+
+  &:hover {
+    color: var(--accent);
+    text-decoration: none;
+  }
+}
+
+.head {
+  margin-bottom: 2rem;
+
+  .category {
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    font-size: 0.72rem;
+    margin-bottom: 0.8rem;
+  }
+
+  h1 {
+    font-size: clamp(2.2rem, 6vw, 3.4rem);
+    letter-spacing: -0.015em;
+  }
+
+  .tagline {
+    margin-top: 0.9rem;
+    color: var(--text-soft);
+    font-size: 1.12rem;
+    font-weight: 500;
+  }
+}
+
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem 2.75rem;
+  list-style: none;
+  margin: 0 0 2.5rem;
+  padding: 1.3rem 1.5rem;
+
+  li {
+    display: grid;
+    gap: 0.15rem;
+  }
+
+  .value {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--accent);
+  }
+
+  .label {
+    color: var(--text-faint);
+    font-size: 0.7rem;
+  }
+}
+
+.prose {
+  display: grid;
+  gap: 1.15rem;
+  color: var(--text-soft);
+}
+
+.sub {
+  color: var(--accent);
+  font-weight: 500;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  margin: 2.75rem 0 1.1rem;
+}
+
+.highlights {
+  margin: 0;
+  padding-left: 1.15rem;
+  display: grid;
+  gap: 0.7rem;
+  color: var(--text-soft);
+
+  li::marker {
+    color: var(--accent);
+  }
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 2.5rem;
+}
+
+.pager {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin-top: 3.5rem;
+
+  .jump {
+    padding: 1.1rem 1.35rem;
+    display: grid;
+    gap: 0.3rem;
+    color: inherit;
+    transition:
+      border-color 0.2s ease,
+      transform 0.2s ease;
+
+    &:hover {
+      text-decoration: none;
+      transform: translateY(-3px);
+      border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
+
+      .name {
+        color: var(--accent);
+      }
+    }
+  }
+
+  .next {
+    text-align: right;
+
+    .dir {
+      justify-content: flex-end;
+    }
+  }
+
+  .dir {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    color: var(--text-faint);
+    font-size: 0.72rem;
+  }
+
+  .name {
+    font-family: var(--font-display);
+    font-weight: 600;
+    transition: color 0.2s ease;
+  }
+}
+
+@media (max-width: 620px) {
+  .pager {
+    grid-template-columns: 1fr;
+  }
+}

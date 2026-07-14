@@ -1,0 +1,49 @@
+.footer {
+  border-top: 1px solid var(--border);
+  padding-block: 2.5rem;
+}
+
+.inner {
+  display: grid;
+  justify-items: center;
+  gap: 1rem;
+  text-align: center;
+}
+
+.social {
+  display: flex;
+  gap: 1.4rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  a {
+    color: var(--text-soft);
+    transition:
+      color 0.18s ease,
+      transform 0.18s ease;
+    display: inline-flex;
+
+    &:hover {
+      color: var(--accent);
+      transform: translateY(-2px);
+    }
+  }
+}
+
+.note {
+  color: var(--text-faint);
+
+  a {
+    color: var(--text-soft);
+
+    &:hover {
+      color: var(--accent);
+    }
+  }
+}
+
+.copyright {
+  color: var(--text-faint);
+  font-size: 0.7rem;
+}

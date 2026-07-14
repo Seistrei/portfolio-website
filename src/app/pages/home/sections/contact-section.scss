@@ -1,0 +1,24 @@
+.contact {
+  text-align: center;
+  padding-bottom: clamp(6rem, 14vh, 9rem);
+}
+
+.narrow {
+  max-width: 38rem;
+  display: grid;
+  justify-items: center;
+}
+
+.kicker {
+  color: var(--accent);
+  margin-bottom: 0.9rem;
+}
+
+h2 {
+  font-size: clamp(2.1rem, 5vw, 3rem);
+}
+
+.blurb {
+  color: var(--text-soft);
+  margin: 1.4rem 0 2.4rem;
+}

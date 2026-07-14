@@ -1,0 +1,30 @@
+<section class="hero">
+  <div class="container">
+    <p class="eyebrow mono" appReveal>{{ profile.role }}</p>
+    <h1 appReveal="70ms">Heath Rohlman</h1>
+    <p class="lede" appReveal="140ms">{{ profile.tagline }}</p>
+
+    <div class="cta" appReveal="210ms">
+      <a class="btn btn-primary" routerLink="/" fragment="projects">
+        See my work
+        <app-icon name="arrow-down" [size]="17" />
+      </a>
+      <a class="btn btn-ghost" routerLink="/" fragment="contact">Get in touch</a>
+    </div>
+
+    <ul class="social" appReveal="280ms">
+      @for (link of profile.links; track link.id) {
+        <li>
+          <a
+            [href]="link.url"
+            [attr.target]="link.id === 'email' ? null : '_blank'"
+            rel="noopener"
+            [attr.aria-label]="link.label"
+          >
+            <app-icon [name]="link.id" [size]="22" />
+          </a>
+        </li>
+      }
+    </ul>
+  </div>
+</section>

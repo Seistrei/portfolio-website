@@ -1,0 +1,25 @@
+<section class="section" appSection="about">
+  <div class="container">
+    <app-section-heading index="01." title="About" />
+
+    <div class="grid">
+      <div class="prose" appReveal>
+        @for (paragraph of paragraphs; track $index) {
+          <p>{{ paragraph }}</p>
+        }
+      </div>
+
+      <aside class="card snapshot" appReveal="140ms">
+        <h3 class="mono">// currently</h3>
+        <dl>
+          @for (entry of snapshot; track entry.label) {
+            <div class="row">
+              <dt class="mono">{{ entry.label }}</dt>
+              <dd>{{ entry.value }}</dd>
+            </div>
+          }
+        </dl>
+      </aside>
+    </div>
+  </div>
+</section>

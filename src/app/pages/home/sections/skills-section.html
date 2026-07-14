@@ -1,0 +1,18 @@
+<section class="section" appSection="skills">
+  <div class="container">
+    <app-section-heading index="04." title="Skills & Tools" />
+
+    <div class="grid">
+      @for (group of groups; track group.title) {
+        <div class="card group" [appReveal]="$index * 70 + 'ms'">
+          <h3 class="mono">{{ group.title }}</h3>
+          <ul class="chip-row">
+            @for (skill of group.skills; track skill) {
+              <li class="chip">{{ skill }}</li>
+            }
+          </ul>
+        </div>
+      }
+    </div>
+  </div>
+</section>

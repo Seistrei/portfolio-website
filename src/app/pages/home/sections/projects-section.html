@@ -1,0 +1,19 @@
+<section class="section" appSection="projects">
+  <div class="container">
+    <app-section-heading index="03." title="Things I've Built" />
+
+    @for (project of featured; track project.slug) {
+      <div class="featured" appReveal>
+        <app-project-card [project]="project" />
+      </div>
+    }
+
+    <div class="grid">
+      @for (project of rest; track project.slug) {
+        <div [appReveal]="$index * 90 + 'ms'">
+          <app-project-card [project]="project" />
+        </div>
+      }
+    </div>
+  </div>
+</section>

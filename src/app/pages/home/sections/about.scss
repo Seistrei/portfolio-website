@@ -1,0 +1,55 @@
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr);
+  gap: clamp(2rem, 4vw, 3.5rem);
+  align-items: start;
+}
+
+.prose {
+  display: grid;
+  gap: 1.15rem;
+  color: var(--text-soft);
+
+  p {
+    max-width: 62ch;
+  }
+}
+
+.snapshot {
+  padding: 1.6rem;
+
+  h3 {
+    color: var(--accent);
+    margin-bottom: 1.1rem;
+    font-weight: 500;
+  }
+
+  dl {
+    margin: 0;
+    display: grid;
+    gap: 0.95rem;
+  }
+
+  .row {
+    display: grid;
+    gap: 0.15rem;
+  }
+
+  dt {
+    color: var(--text-faint);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+  }
+
+  dd {
+    margin: 0;
+    font-weight: 500;
+  }
+}
+
+@media (max-width: 820px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

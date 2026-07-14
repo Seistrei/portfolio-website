@@ -1,0 +1,67 @@
+<header class="header" [class.scrolled]="scrolled() || menuOpen()">
+  <div class="container bar">
+    <a class="brand" routerLink="/" aria-label="Heath Rohlman — home" (click)="menuOpen.set(false)">
+      <svg viewBox="0 0 32 32" width="26" height="26" aria-hidden="true">
+        <polygon
+          points="16,2.5 27.7,9.25 27.7,22.75 16,29.5 4.3,22.75 4.3,9.25"
+          fill="currentColor"
+        />
+        <polygon points="16,8.5 22.5,12.25 22.5,19.75 16,23.5 9.5,19.75 9.5,12.25" class="inner" />
+      </svg>
+      <span>heath rohlman</span>
+    </a>
+
+    <nav class="links" aria-label="Primary">
+      @for (item of nav; track item.id) {
+        <a
+          routerLink="/"
+          [fragment]="item.id"
+          [class.active]="spy.activeId() === item.id"
+          [attr.aria-current]="spy.activeId() === item.id ? 'true' : null"
+        >
+          <span class="mono index" aria-hidden="true">0{{ $index + 1 }}.</span>{{ item.label }}
+        </a>
+      }
+    </nav>
+
+    <div class="actions">
+      <a class="btn btn-ghost resume" [href]="profile.resumeUrl" target="_blank" rel="noopener">
+        Résumé
+      </a>
+      <button
+        type="button"
+        class="icon-btn"
+        (click)="theme.toggle()"
+        [attr.aria-label]="theme.isDark() ? 'Switch to light theme' : 'Switch to dark theme'"
+      >
+        <app-icon [name]="theme.isDark() ? 'sun' : 'moon'" [size]="19" />
+      </button>
+      <button
+        type="button"
+        class="icon-btn menu-btn"
+        (click)="menuOpen.set(!menuOpen())"
+        [attr.aria-expanded]="menuOpen()"
+        aria-controls="mobile-nav"
+        aria-label="Toggle navigation menu"
+      >
+        <app-icon [name]="menuOpen() ? 'close' : 'menu'" [size]="21" />
+      </button>
+    </div>
+  </div>
+
+  @if (menuOpen()) {
+    <nav class="mobile" id="mobile-nav" aria-label="Primary mobile">
+      @for (item of nav; track item.id) {
+        <a
+          routerLink="/"
+          [fragment]="item.id"
+          [class.active]="spy.activeId() === item.id"
+          (click)="menuOpen.set(false)"
+        >
+          <span class="mono index" aria-hidden="true">0{{ $index + 1 }}.</span>{{ item.label }}
+        </a>
+      }
+      <a class="btn btn-ghost" [href]="profile.resumeUrl" target="_blank" rel="noopener">Résumé</a>
+    </nav>
+  }
+</header>

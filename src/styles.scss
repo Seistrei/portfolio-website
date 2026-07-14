@@ -1,0 +1,293 @@
+/* ---------------------------------------------------------------------------
+   Design system — night sky & telescope gold.
+   Fonts are loaded via angular.json (@fontsource-variable packages).
+--------------------------------------------------------------------------- */
+
+:root {
+  /* Palette — dark (default) */
+  --bg: #05070f;
+  --bg-raised: #0a1020;
+  --card: #0d142a;
+  --border: rgba(154, 170, 220, 0.14);
+  --border-strong: rgba(154, 170, 220, 0.28);
+  --text: #e8ecf8;
+  --text-soft: #a9b2cb;
+  --text-faint: #77809b;
+  --accent: #ecc45f;
+  --accent-strong: #f4d47e;
+  --accent-ink: #191203;
+  --accent-soft: rgba(236, 196, 95, 0.13);
+  --star: #9db4ff;
+  --violet: #a78bfa;
+  --glow-a: rgba(236, 196, 95, 0.07);
+  --glow-b: rgba(88, 111, 214, 0.12);
+  --shadow: 0 18px 50px -18px rgba(0, 0, 0, 0.55);
+  --starfield-opacity: 1;
+
+  /* Type */
+  --font-display: 'Space Grotesk Variable', 'Segoe UI', system-ui, sans-serif;
+  --font-body: 'Inter Variable', 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', ui-monospace, 'Cascadia Code', Consolas, monospace;
+
+  /* Layout */
+  --header-h: 4.25rem;
+  --radius: 16px;
+  --radius-sm: 10px;
+
+  color-scheme: dark;
+  accent-color: var(--accent);
+}
+
+:root[data-theme='light'] {
+  --bg: #faf9f4;
+  --bg-raised: #f2f0e7;
+  --card: #ffffff;
+  --border: rgba(26, 34, 66, 0.13);
+  --border-strong: rgba(26, 34, 66, 0.26);
+  --text: #191f36;
+  --text-soft: #48516e;
+  --text-faint: #707894;
+  --accent: #9a6c14;
+  --accent-strong: #7c560f;
+  --accent-ink: #fffdf5;
+  --accent-soft: rgba(154, 108, 20, 0.11);
+  --star: #3b5bdb;
+  --violet: #6d5bd0;
+  --glow-a: rgba(216, 168, 63, 0.1);
+  --glow-b: rgba(88, 111, 214, 0.09);
+  --shadow: 0 16px 40px -20px rgba(30, 38, 76, 0.3);
+  --starfield-opacity: 0.35;
+
+  color-scheme: light;
+}
+
+/* ------------------------------------------------------------------ reset */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-padding-top: calc(var(--header-h) + 1.5rem);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: var(--font-display);
+  line-height: 1.15;
+  margin: 0;
+  text-wrap: balance;
+}
+
+p {
+  margin: 0;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+  text-underline-offset: 0.2em;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  font: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+@supports (scrollbar-width: thin) {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-strong) transparent;
+  }
+}
+
+/* -------------------------------------------------------------- utilities */
+
+.container {
+  width: min(100% - 2.5rem, 68rem);
+  margin-inline: auto;
+}
+
+.section {
+  padding-block: clamp(4.5rem, 11vh, 7.5rem);
+  position: relative;
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+}
+
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 100;
+  padding: 0.6rem 1rem;
+  background: var(--card);
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  transform: translateY(-200%);
+
+  &:focus-visible {
+    transform: none;
+  }
+}
+
+/* ---------------------------------------------------------------- buttons */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.72rem 1.35rem;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 0.95rem;
+  line-height: 1;
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease,
+    background-color 0.18s ease,
+    border-color 0.18s ease,
+    color 0.18s ease;
+
+  &:hover {
+    text-decoration: none;
+    transform: translateY(-2px);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.btn-primary {
+  background: linear-gradient(135deg, var(--accent-strong), var(--accent));
+  color: var(--accent-ink);
+
+  &:hover {
+    box-shadow: 0 10px 30px -8px color-mix(in srgb, var(--accent) 55%, transparent);
+  }
+}
+
+.btn-ghost {
+  border: 1px solid var(--border-strong);
+  color: var(--text);
+
+  &:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: var(--accent-soft);
+  }
+}
+
+/* ------------------------------------------------------------------ chips */
+
+.chip {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  padding: 0.28rem 0.7rem;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  color: color-mix(in srgb, var(--accent) 80%, var(--text));
+  border: 1px solid color-mix(in srgb, var(--accent) 26%, transparent);
+  white-space: nowrap;
+}
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+/* ------------------------------------------------------------------ cards */
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+/* ----------------------------------------------------------------- reveal */
+
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+
+  &.is-visible {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 0.65s ease,
+      transform 0.65s cubic-bezier(0.2, 0.7, 0.2, 1);
+    transition-delay: var(--reveal-delay, 0s);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .btn,
+  .btn:hover {
+    transform: none;
+  }
+}

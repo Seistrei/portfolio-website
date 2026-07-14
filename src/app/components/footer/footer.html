@@ -1,0 +1,23 @@
+<footer class="footer">
+  <div class="container inner">
+    <ul class="social">
+      @for (link of profile.links; track link.id) {
+        <li>
+          <a
+            [href]="link.url"
+            [attr.target]="link.id === 'email' ? null : '_blank'"
+            rel="noopener"
+            [attr.aria-label]="link.label"
+          >
+            <app-icon [name]="link.id" [size]="20" />
+          </a>
+        </li>
+      }
+    </ul>
+    <p class="mono note">
+      <a [href]="profile.sourceUrl" target="_blank" rel="noopener">designed & built</a>
+      by {{ profile.name }} · Angular 22, zoneless & signals
+    </p>
+    <p class="mono copyright">© {{ year }}</p>
+  </div>
+</footer>
