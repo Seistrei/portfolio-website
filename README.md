@@ -47,12 +47,14 @@ npm run build    # production build → dist/portfolio-website
 npm test         # vitest unit tests
 ```
 
-## Deploying to GitHub Pages
+## Deployment
 
-```bash
-ng build --base-href /portfolio-website/
-```
+Every push to `main` deploys automatically to GitHub Pages via
+[.github/workflows/deploy.yml](.github/workflows/deploy.yml): the workflow runs the unit tests,
+builds with `--base-href /portfolio-website/`, copies `index.html` to `404.html` so deep links
+(`/projects/...`) resolve, and publishes the artifact.
 
-Then publish `dist/portfolio-website/browser` to GitHub Pages (for example with
-`angular-cli-ghpages`, or a Pages workflow). For deep links (`/projects/...`) on Pages, copy
-`index.html` to `404.html` in the published folder so the SPA handles unknown paths.
+Live at: https://seistrei.github.io/portfolio-website/
+
+If a custom domain is added later, update `--base-href` to `/`, the `canonical`/`og:url` tags in
+`src/index.html`, and the custom domain in the repository's Pages settings.
