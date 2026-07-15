@@ -21,7 +21,7 @@ export const PROFILE = {
     {
       id: 'linkedin',
       label: 'LinkedIn',
-      url: 'https://www.linkedin.com/in/heath-rohlman-7a00741b8/',
+      url: 'https://www.linkedin.com/in/heath-rohlman/',
     },
     { id: 'email', label: 'Email', url: 'mailto:heath.rohlman@gmail.com' },
   ] as readonly SocialLink[],
