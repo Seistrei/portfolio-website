@@ -21,27 +21,26 @@ export const EXPERIENCE: readonly Experience[] = [
       {
         title: 'Reusable Ground-Systems Visualization Framework',
         bullets: [
-          `Develop and maintain a reusable Angular 20 visualization framework used by multiple
-           RTX programs to build browser-based satellite data displays.`,
-          `Reduced Largest Contentful Paint by 55% in a production application built with the
+          `Develop and maintain a reusable Angular 20 visualization framework with 20+ reusable
+           components and APIs used across 10+ RTX programs to build browser-based satellite
+           data displays.`,
+          `Reduced Largest Contentful Paint by 55% across production applications built with the
            framework by introducing lazy loading for components previously loaded at startup.`,
           `Led the framework's migration from Angular 18 to Angular 20, including adoption of
            zoneless change detection in its reference application and automated test environment.`,
-          `Design reusable visualization components and framework APIs that let program teams
-           create specialized data displays without duplicating common infrastructure.`,
         ],
       },
       {
         title: 'James Webb Space Telescope',
         bullets: [
-          `Modernized legacy operational displays, originally developed for desktop systems in
-           the 2000s, as browser-based Angular applications used by JWST operators.`,
-          `Built end-to-end data-viewing features spanning the Angular frontend and Java-based
-           Windows services, contributing backend changes to expose new data and interfaces.`,
-          `Reworked communication between the application and its Web Workers, eliminating race
-           conditions that left displays stuck loading or receiving data inconsistently.`,
+          `Modernized seven legacy operational displays, originally developed for desktop
+           systems in the 2000s, into browser-based Angular applications used by JWST operators.`,
+          `Delivered end-to-end data-viewing features across Angular and Java-based Windows
+           services, adding backend interfaces required by the browser applications.`,
+          `Redesigned communication between the application and its Web Workers to eliminate
+           race conditions that left displays stuck loading or produced inconsistent data.`,
           `Refactored a high-volume plotting component to reduce unnecessary chart updates and
-           stay responsive while processing large bursts of JWST data.`,
+           improve responsiveness during bursts of JWST telemetry.`,
         ],
       },
     ],

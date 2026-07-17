@@ -17,7 +17,8 @@ interface NavItem {
   styleUrl: './header.scss',
   host: {
     '(window:scroll)': 'onWindowScroll()',
-    '(window:keydown.escape)': 'menuOpen.set(false)',
+    '(window:keydown.escape)': 'closeMenus()',
+    '(document:click)': 'onDocumentClick($event)',
   },
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -36,8 +37,20 @@ export class Header {
 
   protected readonly scrolled = signal(false);
   protected readonly menuOpen = signal(false);
+  protected readonly resumeOpen = signal(false);
 
   protected onWindowScroll(): void {
     this.scrolled.set(window.scrollY > 12);
+  }
+
+  protected closeMenus(): void {
+    this.menuOpen.set(false);
+    this.resumeOpen.set(false);
+  }
+
+  protected onDocumentClick(event: MouseEvent): void {
+    if (!(event.target instanceof Element) || !event.target.closest('.resume-wrap')) {
+      this.resumeOpen.set(false);
+    }
   }
 }

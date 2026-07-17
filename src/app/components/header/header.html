@@ -25,9 +25,32 @@
     </nav>
 
     <div class="actions">
-      <a class="btn btn-ghost resume" [href]="profile.resumeUrl" target="_blank" rel="noopener">
-        Résumé
-      </a>
+      <div class="resume-wrap">
+        <button
+          type="button"
+          class="btn btn-ghost resume"
+          (click)="resumeOpen.set(!resumeOpen())"
+          [attr.aria-expanded]="resumeOpen()"
+          aria-controls="resume-menu"
+        >
+          Résumé
+          <app-icon name="arrow-down" [size]="14" />
+        </button>
+        @if (resumeOpen()) {
+          <div class="resume-menu" id="resume-menu">
+            @for (resume of profile.resumes; track resume.id) {
+              <a
+                [href]="resume.url"
+                target="_blank"
+                rel="noopener"
+                (click)="resumeOpen.set(false)"
+              >
+                {{ resume.label }}
+              </a>
+            }
+          </div>
+        }
+      </div>
       <button
         type="button"
         class="icon-btn"
@@ -61,7 +84,17 @@
           <span class="mono index" aria-hidden="true">0{{ $index + 1 }}.</span>{{ item.label }}
         </a>
       }
-      <a class="btn btn-ghost" [href]="profile.resumeUrl" target="_blank" rel="noopener">Résumé</a>
+      @for (resume of profile.resumes; track resume.id) {
+        <a
+          class="btn btn-ghost"
+          [href]="resume.url"
+          target="_blank"
+          rel="noopener"
+          (click)="menuOpen.set(false)"
+        >
+          {{ resume.label }}
+        </a>
+      }
     </nav>
   }
 </header>

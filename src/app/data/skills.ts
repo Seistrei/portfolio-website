@@ -6,38 +6,32 @@ export interface SkillGroup {
 export const SKILL_GROUPS: readonly SkillGroup[] = [
   {
     title: 'Languages',
-    skills: ['TypeScript', 'JavaScript', 'Java', 'Python', 'SQL', 'C++', 'C#'],
+    skills: ['TypeScript', 'Python', 'JavaScript', 'Java'],
   },
   {
     title: 'Frontend',
     skills: ['Angular', 'Signals & zoneless', 'RxJS', 'React', 'HTML', 'SCSS'],
   },
   {
-    title: 'Backend & Data',
+    title: 'Python & AI',
     skills: [
-      'Node.js',
-      'REST APIs',
-      'PostgreSQL',
-      'MongoDB',
-      'SQLite',
-      'WebSockets',
-      'NATS',
       'FastAPI',
+      'Pydantic',
+      'pytest',
+      'asyncio',
+      'LLM APIs',
+      'Tool calling',
+      'Agent orchestration',
+      'Context management',
+      'Memory systems',
     ],
+  },
+  {
+    title: 'Backend & Data',
+    skills: ['NATS', 'Node.js', 'PostgreSQL', 'MongoDB', 'SQLite', 'REST APIs', 'WebSockets'],
   },
   {
     title: 'Testing & DevOps',
-    skills: ['Docker', 'GitLab CI/CD', 'Git', 'Jest', 'Vitest', 'pytest'],
-  },
-  {
-    title: 'AI & LLM Systems',
-    skills: [
-      'Claude & OpenAI APIs',
-      'Tool calling',
-      'Context compaction',
-      'Prompt caching',
-      'Autonomous agents',
-      'Vector memory',
-    ],
+    skills: ['Docker', 'GitHub Actions', 'GitLab CI/CD', 'Git', 'Jest', 'Vitest'],
   },
 ];

@@ -4,18 +4,27 @@ export interface SocialLink {
   readonly url: string;
 }
 
+export interface ResumeLink {
+  readonly id: 'frontend' | 'python';
+  readonly label: string;
+  readonly url: string;
+}
+
 export const PROFILE = {
   name: 'Heath Rohlman',
   role: 'Software Engineer II · RTX',
   email: 'heath.rohlman@gmail.com',
-  resumeUrl: 'resume.pdf',
+  resumes: [
+    { id: 'frontend', label: 'Frontend résumé', url: 'resume-frontend.pdf' },
+    { id: 'python', label: 'Python & AI résumé', url: 'resume-python.pdf' },
+  ] as readonly ResumeLink[],
   sourceUrl: 'https://github.com/Seistrei/portfolio-website',
   tagline:
     'I build the web software that satellite operators rely on. At RTX I develop a reusable ' +
     'Angular visualization framework for browser-based ground-system displays, and I previously ' +
     'modernized the operational displays used by James Webb Space Telescope operators. Outside ' +
-    'of work I build complete systems of my own, most recently an autonomous AI companion for ' +
-    'Discord.',
+    'of work I build complete systems of my own, most recently an always-on AI agent platform ' +
+    'built in Python.',
   links: [
     { id: 'github', label: 'GitHub', url: 'https://github.com/Seistrei' },
     {
@@ -29,19 +38,19 @@ export const PROFILE = {
 
 export const ABOUT_PARAGRAPHS: readonly string[] = [
   `I graduated from CU Boulder with a B.S. in Computer Science in 2023 and joined Raytheon (RTX)
-   as a software engineer. I work on a reusable Angular visualization framework that multiple RTX
-   programs use to build browser-based satellite data displays. I led the framework's migration
-   from Angular 18 to Angular 20, including the adoption of zoneless change detection, and
-   reduced a production application's Largest Contentful Paint by 55% by introducing lazy
-   loading.`,
-  `Earlier at RTX I worked on the James Webb Space Telescope, modernizing operational displays
-   originally written for 2000s-era desktop systems into browser-based Angular applications used
-   by JWST operators. The work spanned the full stack: building data-viewing features across the
+   as a software engineer. I work on a reusable Angular visualization framework with 20+
+   components and APIs that 10+ RTX programs use to build browser-based satellite data displays.
+   I led the framework's migration from Angular 18 to Angular 20, including the adoption of
+   zoneless change detection, and reduced Largest Contentful Paint by 55% across production
+   applications by introducing lazy loading.`,
+  `Earlier at RTX I worked on the James Webb Space Telescope, modernizing seven operational
+   displays originally written for 2000s-era desktop systems into browser-based Angular
+   applications used by JWST operators. The work spanned the full stack: building data-viewing features across the
    Angular frontend and Java services, eliminating Web Worker race conditions that caused
    displays to load inconsistently, and keeping a high-volume plotting component responsive
    during large bursts of telemetry.`,
   `Outside of work I build substantial personal projects. The largest is Nykta, an autonomous AI
-   companion for Discord built as six event-driven microservices, with long-term memory, a
-   permission-gated autonomy system, and an Angular monitoring dashboard. I also design complex
+   companion for Discord built as six event-driven Python microservices, with long-term memory,
+   a permission-gated autonomy system, voice interaction, and an Angular monitoring dashboard. I also design complex
    Overwatch game modes, and I write fiction.`,
 ];

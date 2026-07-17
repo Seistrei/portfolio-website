@@ -84,9 +84,54 @@
   gap: 0.6rem;
 }
 
+.resume-wrap {
+  position: relative;
+}
+
 .resume {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
   padding: 0.5rem 1rem;
   font-size: 0.85rem;
+
+  app-icon {
+    transition: transform 0.18s ease;
+  }
+
+  &[aria-expanded='true'] app-icon {
+    transform: rotate(180deg);
+  }
+}
+
+.resume-menu {
+  position: absolute;
+  top: calc(100% + 0.55rem);
+  right: 0;
+  display: grid;
+  gap: 0.15rem;
+  min-width: 12.5rem;
+  padding: 0.4rem;
+  background: color-mix(in srgb, var(--bg) 94%, transparent);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow);
+
+  a {
+    padding: 0.55rem 0.75rem;
+    border-radius: var(--radius-sm);
+    color: var(--text-soft);
+    font-size: 0.88rem;
+    font-weight: 500;
+    white-space: nowrap;
+
+    &:hover {
+      color: var(--text);
+      background: var(--accent-soft);
+      text-decoration: none;
+    }
+  }
 }
 
 .icon-btn {
@@ -120,7 +165,7 @@
 
 @media (max-width: 860px) {
   .links,
-  .resume {
+  .resume-wrap {
     display: none;
   }
 
@@ -156,6 +201,10 @@
     .btn {
       justify-self: start;
       margin-top: 0.5rem;
+    }
+
+    .btn + .btn {
+      margin-top: 0;
     }
   }
 }
