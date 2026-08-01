@@ -18,21 +18,23 @@
     <meta property="og:url" content="https://seistrei.github.io/portfolio-website/" />
     <link rel="canonical" href="https://seistrei.github.io/portfolio-website/" />
     <meta name="color-scheme" content="dark light" />
-    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#05070f" />
-    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#faf9f5" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0a0e16" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#faf3ec" />
     <link rel="icon" href="favicon.ico" sizes="32x32" />
     <link rel="icon" type="image/svg+xml" href="favicon.svg" />
     <link rel="apple-touch-icon" href="apple-touch-icon.png" />
     <script>
       // Apply the saved (or system) theme before Angular boots to avoid a flash.
+      // Themes are named for the two moons: rikt (light), rim (dark); the old
+      // 'light'/'dark' values some visitors have saved map onto them.
       try {
         const saved = localStorage.getItem('hr-theme');
-        const dark = saved
-          ? saved === 'dark'
-          : !matchMedia('(prefers-color-scheme: light)').matches;
-        document.documentElement.dataset['theme'] = dark ? 'dark' : 'light';
+        const light = saved
+          ? saved === 'rikt' || saved === 'light'
+          : matchMedia('(prefers-color-scheme: light)').matches;
+        document.documentElement.dataset['theme'] = light ? 'rikt' : 'rim';
       } catch {
-        document.documentElement.dataset['theme'] = 'dark';
+        document.documentElement.dataset['theme'] = 'rim';
       }
     </script>
   </head>

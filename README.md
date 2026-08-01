@@ -16,11 +16,14 @@ small codebase that can be read end to end.
   the `:slug` route parameter directly to a signal input, and a functional guard redirects
   unknown slugs home.
 - **View transitions** between routes.
-- **Hand-written SCSS design system.** No UI framework. CSS custom properties drive the dark and
-  light themes, and a pre-boot script applies the saved (or system) theme before Angular loads so
-  there is no flash.
-- **Canvas starfield** with twinkling parallax stars and occasional shooting stars. It is
-  DPR-aware, pauses while the tab is hidden, and renders static under `prefers-reduced-motion`.
+- **Hand-written SCSS design system.** No UI framework. CSS custom properties drive the light
+  and dark themes, named Rikt and Rim for the two moons of _Memory's Hourglass_, the novel I am
+  writing. A pre-boot script applies the saved (or system) theme before Angular loads so there
+  is no flash.
+- **Canvas sky** with parallax particles per theme: softly glowing memory-sand, black snow, and
+  a slowly color-shifting splatterstar under Rim; rising ember motes and occasional shooting
+  stars under Rikt. It is DPR-aware, pauses while the tab is hidden, and renders static under
+  `prefers-reduced-motion`.
 - **IntersectionObserver directives** for scroll-spy navigation and reveal-on-scroll animations.
 - **Typed content model.** Everything the site says (profile, experience, projects, skills)
   lives in `src/app/data/` as typed TypeScript, fully separated from the components that render

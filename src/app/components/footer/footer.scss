@@ -43,6 +43,16 @@
   }
 }
 
+.theme-note {
+  margin-top: -0.55rem;
+  max-width: 36rem;
+  text-wrap: balance;
+
+  cite {
+    font-style: italic;
+  }
+}
+
 .copyright {
   color: var(--text-faint);
   font-size: 0.7rem;

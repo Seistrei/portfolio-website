@@ -1,6 +1,10 @@
 import { DOCUMENT, Injectable, effect, inject, signal } from '@angular/core';
 
-export type ThemeName = 'dark' | 'light';
+/**
+ * Themes are named for the two moons of "Memory's Hourglass":
+ * Rikt, the red lightmoon (light), and Rim, the darkmoon (dark).
+ */
+export type ThemeName = 'rikt' | 'rim';
 
 const STORAGE_KEY = 'hr-theme';
 
@@ -13,9 +17,9 @@ export class Theme {
   private readonly document = inject(DOCUMENT);
 
   readonly current = signal<ThemeName>(
-    this.document.documentElement.dataset['theme'] === 'light' ? 'light' : 'dark',
+    this.document.documentElement.dataset['theme'] === 'rikt' ? 'rikt' : 'rim',
   );
-  readonly isDark = () => this.current() === 'dark';
+  readonly isDark = () => this.current() === 'rim';
 
   constructor() {
     effect(() => {
@@ -30,6 +34,6 @@ export class Theme {
   }
 
   toggle(): void {
-    this.current.update((t) => (t === 'dark' ? 'light' : 'dark'));
+    this.current.update((t) => (t === 'rim' ? 'rikt' : 'rim'));
   }
 }

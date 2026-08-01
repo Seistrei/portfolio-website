@@ -39,12 +39,7 @@
         @if (resumeOpen()) {
           <div class="resume-menu" id="resume-menu">
             @for (resume of profile.resumes; track resume.id) {
-              <a
-                [href]="resume.url"
-                target="_blank"
-                rel="noopener"
-                (click)="resumeOpen.set(false)"
-              >
+              <a [href]="resume.url" target="_blank" rel="noopener" (click)="resumeOpen.set(false)">
                 {{ resume.label }}
               </a>
             }
@@ -53,11 +48,16 @@
       </div>
       <button
         type="button"
-        class="icon-btn"
+        class="icon-btn theme-toggle"
+        [class.rim]="theme.isDark()"
         (click)="theme.toggle()"
         [attr.aria-label]="theme.isDark() ? 'Switch to light theme' : 'Switch to dark theme'"
+        title="Rikt and Rim, the two moons of Memory's Hourglass"
       >
-        <app-icon [name]="theme.isDark() ? 'sun' : 'moon'" [size]="19" />
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+          <circle class="moon-rikt" cx="12" cy="12" r="7.5" />
+          <circle class="moon-rim" cx="12" cy="12" r="7.5" />
+        </svg>
       </button>
       <button
         type="button"
