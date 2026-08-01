@@ -21,7 +21,7 @@ export class About {
   protected readonly snapshot: readonly SnapshotEntry[] = [
     { label: 'role', value: 'Software Engineer II @ RTX' },
     { label: 'education', value: "CU Boulder · B.S. Computer Science '23" },
-    { label: 'building', value: 'Nykta, an autonomous AI companion' },
-    { label: 'off hours', value: 'game design and fiction writing' },
+    { label: 'building', value: 'Nykta, an autonomous AI agent' },
+    { label: 'off hours', value: "writing Memory's Hourglass, a fantasy novel" },
   ];
 }

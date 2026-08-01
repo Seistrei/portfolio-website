@@ -59,12 +59,13 @@
   --accent-soft: rgba(168, 62, 43, 0.1);
   --star: #a8531e;
   --shadow: 0 16px 40px -20px rgba(88, 38, 24, 0.35);
-  --starfield-opacity: 0.55;
-  /* The red moon hangs in the upper corner as this world's sun; a gold
-     splatterstar wash answers from the far edge. */
+  --starfield-opacity: 1;
+  /* Ambient light around the lightmoon in the right gutter (the canvas draws
+     the disc itself), answered by a gold wash from the opposite corner. On
+     narrow viewports the canvas skips the disc and this glow is the moon. */
   --sky:
-    radial-gradient(46rem 34rem at 13% -12%, rgba(196, 74, 48, 0.19), transparent 64%),
-    radial-gradient(50rem 38rem at 88% 112%, rgba(224, 168, 60, 0.14), transparent 68%);
+    radial-gradient(46rem 34rem at 92% 24%, rgba(196, 74, 48, 0.12), transparent 62%),
+    radial-gradient(50rem 38rem at 6% 108%, rgba(224, 168, 60, 0.08), transparent 68%);
 
   color-scheme: light;
 }

@@ -29,7 +29,7 @@ export const PROJECTS: readonly Project[] = [
     slug: 'nykta',
     name: 'Nykta',
     category: 'AI Systems',
-    tagline: 'An autonomous AI companion built on event-driven microservices',
+    tagline: 'An autonomous AI agent built on event-driven microservices',
     summary: `A persistent AI persona for Discord. It maintains long-term memory, initiates
       conversations through a permission-gated autonomy system, plays chess on Lichess, and
       speaks in voice channels. Built as six Dockerized microservices communicating over NATS,

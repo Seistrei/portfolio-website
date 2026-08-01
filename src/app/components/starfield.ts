@@ -36,19 +36,25 @@ const RIKT_EMBERS = ['#d97742', '#e0a83c', '#b5442f'];
 /** Rim: black snow, barely darker than the sky behind it. */
 const SNOW_COLOR = '#03060b';
 const METEOR_LIFE_MS = 900;
-const SPLATTER_SHIFT_MS = 4200;
+const SPLATTER_SHIFT_MS = 5200;
+/** Content column: keep in sync with `.container` in styles.scss. */
+const CONTAINER_MAX_PX = 1088;
+const CONTAINER_GUTTER_PX = 40;
 
 /**
  * Decorative sky canvas for the two moons of "Memory's Hourglass".
  *
- * Rim (dark): memory-sand — sparse glowing grains drifting slowly downward —
+ * Rim (dark): the darkmoon itself hangs upper-right — dark disc, silver limb,
+ * cold halo — while memory-sand (sparse glowing grains) drifts slowly down
  * over a subtler layer of black snow, plus one splatterstar whose hue wanders
  * between red and yellow (and, rarely, colors that don't exist). Still and
  * quiet; no meteors under the darkmoon.
  *
- * Rikt (light): warm ember motes rising like heat, with the occasional
- * shooting star. Pointer parallax in both skies; static under
- * prefers-reduced-motion, paused while the tab is hidden.
+ * Rikt (light): the red lightmoon rises in the right gutter — always outside
+ * the content column so text never scrolls across the bright disc; on narrow
+ * viewports only its glow remains — with warm ember motes rising like heat
+ * and the occasional shooting star. Pointer parallax in both skies; static
+ * under prefers-reduced-motion, paused while the tab is hidden.
  */
 @Component({
   selector: 'app-starfield',
@@ -171,7 +177,8 @@ export class Starfield {
       flake.baseAlpha = 0.35 + Math.random() * 0.45;
       return flake;
     });
-    this.splatter = { x: 0.55 + Math.random() * 0.35, y: 0.06 + Math.random() * 0.24 };
+    // Upper-left sky, clear of the moon that hangs on the right.
+    this.splatter = { x: 0.12 + Math.random() * 0.3, y: 0.07 + Math.random() * 0.19 };
   }
 
   private makeMote(): Mote {
@@ -202,7 +209,7 @@ export class Starfield {
   }
 
   private scheduleExcursion(now: number): void {
-    this.nextExcursionAt = now + 22000 + Math.random() * 26000;
+    this.nextExcursionAt = now + 12000 + Math.random() * 18000;
   }
 
   private draw(time: number): void {
@@ -219,6 +226,8 @@ export class Starfield {
     this.parallax.y += (this.pointer.y - this.parallax.y) * 0.04;
 
     ctx.clearRect(0, 0, this.width, this.height);
+
+    this.drawMoon(ctx, rim);
 
     if (rim) {
       this.drawSnow(ctx, t);
@@ -237,7 +246,8 @@ export class Starfield {
       const y = (((rim ? mote.y + drift : mote.y - drift) % 1) + 1) % 1;
       const x = mote.x * this.width - this.parallax.x * mote.depth * 26;
       const cy = y * this.height - this.parallax.y * mote.depth * 16;
-      const alpha = mote.baseAlpha * twinkle;
+      // The Rikt canvas is no longer dimmed by the host, so embers dim here.
+      const alpha = mote.baseAlpha * twinkle * (rim ? 1 : 0.6);
       const color = palette[mote.palette];
 
       // Soft halo, then the grain itself.
@@ -258,6 +268,92 @@ export class Starfield {
       this.drawMeteor(ctx, time, palette[0]);
     }
     ctx.globalAlpha = 1;
+  }
+
+  /** The resident moon of the current sky, drawn behind every particle. */
+  private drawMoon(ctx: CanvasRenderingContext2D, rim: boolean): void {
+    const w = this.width;
+    const h = this.height;
+    const r = Math.min(Math.max(Math.min(w, h) * 0.15, 48), 150);
+
+    if (rim) {
+      // The darkmoon may hang over the content column: pale text keeps AA
+      // contrast against its near-background disc.
+      this.drawRimMoon(ctx, w * 0.8 - this.parallax.x * 9, h * 0.2 - this.parallax.y * 6, r);
+      return;
+    }
+
+    // The lightmoon is bright, so it rises in the right gutter, outside the
+    // content column. With no gutter room, the corner glow carries it alone.
+    const containerRight = w / 2 + Math.min(w - CONTAINER_GUTTER_PX, CONTAINER_MAX_PX) / 2;
+    const x = containerRight + r + 12 - this.parallax.x * 9;
+    if (w - (x - r) < 36) {
+      return;
+    }
+    this.drawRiktMoon(ctx, x, h * 0.3 - this.parallax.y * 6, r);
+  }
+
+  /** Rim: dark disc, silver limb toward the darkest-day glow, faint craters. */
+  private drawRimMoon(ctx: CanvasRenderingContext2D, x: number, y: number, r: number): void {
+    ctx.globalAlpha = 1;
+    let g = ctx.createRadialGradient(x, y, r * 0.7, x, y, r * 2.4);
+    g.addColorStop(0, 'rgba(210, 226, 242, 0.09)');
+    g.addColorStop(1, 'rgba(210, 226, 242, 0)');
+    ctx.fillStyle = g;
+    ctx.fillRect(x - r * 2.4, y - r * 2.4, r * 4.8, r * 4.8);
+
+    // Lit sliver: a pale backing disc peeking past the offset dark disc.
+    ctx.fillStyle = 'rgba(203, 222, 240, 0.55)';
+    ctx.beginPath();
+    ctx.arc(x, y, r, 0, Math.PI * 2);
+    ctx.fill();
+
+    g = ctx.createRadialGradient(x - r * 0.4, y - r * 0.35, r * 0.15, x, y, r);
+    g.addColorStop(0, '#1a2334');
+    g.addColorStop(0.7, '#111a2b');
+    g.addColorStop(1, '#0c1322');
+    ctx.fillStyle = g;
+    ctx.beginPath();
+    ctx.arc(x + r * 0.035, y + r * 0.035, r * 0.985, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.fillStyle = 'rgba(6, 10, 19, 0.55)';
+    for (const [cx, cy, cr] of [
+      [x - r * 0.3, y + r * 0.22, r * 0.16],
+      [x + r * 0.24, y - r * 0.08, r * 0.1],
+      [x - r * 0.05, y - r * 0.42, r * 0.08],
+    ]) {
+      ctx.beginPath();
+      ctx.arc(cx, cy, cr, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  /** Rikt: radiant disc, wide warm halo, and the thin ring of its barrier. */
+  private drawRiktMoon(ctx: CanvasRenderingContext2D, x: number, y: number, r: number): void {
+    ctx.globalAlpha = 1;
+    let g = ctx.createRadialGradient(x, y, r * 0.5, x, y, r * 3.1);
+    g.addColorStop(0, 'rgba(199, 82, 47, 0.3)');
+    g.addColorStop(0.45, 'rgba(217, 119, 66, 0.12)');
+    g.addColorStop(1, 'rgba(224, 168, 60, 0)');
+    ctx.fillStyle = g;
+    ctx.fillRect(x - r * 3.1, y - r * 3.1, r * 6.2, r * 6.2);
+
+    g = ctx.createRadialGradient(x - r * 0.3, y - r * 0.3, r * 0.1, x, y, r);
+    g.addColorStop(0, '#efa068');
+    g.addColorStop(0.55, '#cd5c35');
+    g.addColorStop(0.9, '#b5442f');
+    g.addColorStop(1, 'rgba(181, 68, 47, 0)');
+    ctx.fillStyle = g;
+    ctx.beginPath();
+    ctx.arc(x, y, r, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.strokeStyle = 'rgba(168, 62, 43, 0.14)';
+    ctx.lineWidth = 1.25;
+    ctx.beginPath();
+    ctx.arc(x, y, r * 1.45, 0, Math.PI * 2);
+    ctx.stroke();
   }
 
   /** Near-black flakes sinking against the faint "darkest day" glow. */
@@ -281,7 +377,7 @@ export class Starfield {
    * yellow, and once in a long while somewhere stranger.
    */
   private drawSplatterstar(ctx: CanvasRenderingContext2D, time: number, t: number): void {
-    let hue = 28 + 26 * Math.sin(t * 0.12);
+    let hue = 28 + 26 * Math.sin(t * 0.21);
     if (!this.reducedMotion) {
       if (!this.excursion && time >= this.nextExcursionAt) {
         this.excursion = { until: time + SPLATTER_SHIFT_MS, hue: 170 + Math.random() * 160 };
@@ -300,13 +396,35 @@ export class Starfield {
 
     const x = this.splatter.x * this.width - this.parallax.x * 10;
     const y = this.splatter.y * this.height - this.parallax.y * 6;
-    const radius = 1.7 + (this.reducedMotion ? 0 : 0.3 * Math.sin(t * 0.9));
+    const radius = 2.4 + (this.reducedMotion ? 0 : 0.5 * Math.sin(t * 0.8));
 
-    ctx.globalAlpha = 0.3;
-    ctx.fillStyle = `hsl(${hue}, 88%, 74%)`;
-    ctx.beginPath();
-    ctx.arc(x, y, radius * 4, 0, Math.PI * 2);
-    ctx.fill();
+    ctx.globalAlpha = 1;
+    const halo = ctx.createRadialGradient(x, y, 0, x, y, radius * 7);
+    halo.addColorStop(0, `hsla(${hue}, 90%, 70%, 0.45)`);
+    halo.addColorStop(1, `hsla(${hue}, 90%, 70%, 0)`);
+    ctx.fillStyle = halo;
+    ctx.fillRect(x - radius * 7, y - radius * 7, radius * 14, radius * 14);
+
+    // Four-point diffraction spikes make it read as one deliberate star.
+    const len = radius * 4.2;
+    ctx.globalAlpha = 0.8;
+    ctx.lineWidth = 1;
+    ctx.lineCap = 'round';
+    for (const [dx, dy] of [
+      [len, 0],
+      [0, len],
+    ]) {
+      const spike = ctx.createLinearGradient(x - dx, y - dy, x + dx, y + dy);
+      spike.addColorStop(0, 'transparent');
+      spike.addColorStop(0.5, `hsl(${hue}, 92%, 72%)`);
+      spike.addColorStop(1, 'transparent');
+      ctx.strokeStyle = spike;
+      ctx.beginPath();
+      ctx.moveTo(x - dx, y - dy);
+      ctx.lineTo(x + dx, y + dy);
+      ctx.stroke();
+    }
+
     ctx.globalAlpha = 0.95;
     ctx.fillStyle = `hsl(${hue}, 90%, 66%)`;
     ctx.beginPath();
@@ -351,7 +469,7 @@ export class Starfield {
     gradient.addColorStop(0, 'transparent');
     gradient.addColorStop(1, color);
 
-    ctx.globalAlpha = 0.75 * fade;
+    ctx.globalAlpha = 0.45 * fade;
     ctx.strokeStyle = gradient;
     ctx.lineWidth = 1.6;
     ctx.lineCap = 'round';
