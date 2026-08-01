@@ -150,9 +150,7 @@ export const PROJECTS: readonly Project[] = [
       { value: '~3.8k', label: 'lines of OverPy' },
       { value: '135', label: 'source rules' },
     ],
-    links: [
-      { label: 'Source on GitHub', url: 'https://github.com/Seistrei/overwatch-roguelite' },
-    ],
+    links: [{ label: 'Source on GitHub', url: 'https://github.com/Seistrei/overwatch-roguelite' }],
     featured: false,
   },
   {
