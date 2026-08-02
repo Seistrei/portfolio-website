@@ -213,50 +213,70 @@ export const PROJECTS: readonly Project[] = [
     slug: 'chess-losebot',
     name: 'Chess LoseBot',
     category: 'Game AI',
-    tagline: 'A misère chess engine that plays to be checkmated',
-    summary: `A chess engine with the win condition inverted: it tries to force the opponent to
-      checkmate it. It combines an exact forced-selfmate proof search with a misère-tuned
-      negamax, benchmarked against a clone of a mate-avoidant opponent that simpler approaches
-      like Worstfish cannot break.`,
+    tagline: 'A misère chess engine that models its opponent and plays to be checkmated',
+    summary: `A chess engine with the win condition inverted: it must force a reluctant opponent
+      to checkmate it. Originally a hand-tuned specialist, it was rebuilt around a learned
+      opponent model: expectimax search over exact per-move probabilities, Bayesian inference of
+      the opponent mid-game, maximum-likelihood fits from recorded games, and an exact
+      forced-selfmate prover. It plays live on Lichess.`,
     overview: [
       `Misère chess uses standard rules with the goal inverted: you win by being checkmated.
        Avoiding wins is easy; the hard problem is forcing a reluctant opponent to deliver mate.
-       LoseBot targets exactly that case, benchmarked against a clone of Chess.com's Zach bot,
-       which shuffles pieces, avoids captures, and never mates unless forced to.`,
-      `Move selection runs in three tiers. A hard filter discards any move that would checkmate
-       or stalemate the opponent while an alternative exists. An exact AND/OR proof search then
-       looks for forced self-mates: lines where every opponent reply still leads to LoseBot being
-       mated within a bounded number of moves. When no proof is found, a misère-tuned negamax
-       with inverted terminal values chooses the move.`,
-      `Games run in a local Docker arena under PyPy against bundled sparring partners, including
-       a Worstfish baseline driven by real Stockfish over UCI. Every engine iteration is recorded
-       in a tuning log with versioned, frozen configuration profiles so results stay
-       reproducible.`,
+       LoseBot targets exactly that case, and it now plays live on Lichess as a bot account
+       that accepts casual challenges at rapid speeds and slower.`,
+      `The first generation was a hand-built specialist: exact proof search against one modeled
+       opponent, misère negamax, and a library of hand-derived endgame plans. It converted the
+       scenarios it drilled, but measurement exposed the wall: from one benchmark position, one
+       opponent style converted ten out of ten while another converted zero out of ten, and the
+       plans the two styles demand are opposite with no board feature to say which one you are
+       facing. That information lives in the opponent's move distribution, so the engine was
+       rebuilt around one. The complete first era survives in the repository as a frozen
+       benchmark anchor, a source of training positions, and a reference implementation.`,
+      `Every opponent is now a point in a parametric family of behavioral urges (greed,
+       checking, king hunting, corner homing, mercy lapses, and others) over a mate-avoidant
+       core, and each model exposes exact per-move probabilities. Expectimax search puts that
+       distribution directly in the tree, a Bayesian posterior re-infers the opponent from
+       every observed move, and an offline maximum-likelihood fitter estimates urge parameters
+       from recorded games, with archived Lichess games as the growing corpus. A separate
+       oracle proves forced selfmates that hold against any reply, with no opponent model
+       anywhere in the proof.`,
+      `Progress is measured by a frozen league run in Docker under PyPy. Three development
+       families are fair game for tuning; four held-out families were frozen the day the
+       rebuild began and are never tuned against. Every game lands in a ten-label outcome
+       taxonomy, a mate counts fully only if the opponent had no legal alternative, and the
+       worst held-out family is reported as prominently as the mean.`,
     ],
     highlights: [
-      `A tri-state proof search (proven, disproven, unknown) in which budget exhaustion is never
-       memoized as a refutation, a correctness subtlety covered by the self-test suite.`,
-      `Draw-rule-aware memoization: transposition keys deliberately include the halfmove clock
-       and repetition history, because merging positions without them can turn a draw into a
-       false proof.`,
-      `Draw avoidance as a first-class concern, with stalemate filters, draw contempt at terminal
-       nodes, repetition penalties, and fifty-move-clock urgency, since the goal is to lose
-       rather than draw.`,
-      `The opponent model lives only in the exact proof search, not in the general negamax. An
-       earlier version that modeled capture-aversion everywhere learned to build cages out of
-       hanging pieces, which the opponent simply captured.`,
-      `Evaluation counts men rather than material points, so promotion gains nothing and
-       queen-farming branch explosions are avoided.`,
-      `A documented tuning history across nine versions, including reconstructing a lost
-       configuration from the log after a pre-git mistake.`,
+      `A parametric opponent family in urge space: every opponent is a set of behavioral
+       weights over a mate-avoidant core, so newly observed behavior updates parameters
+       instead of spawning another hand-written doctrine.`,
+      `Expectimax steering with the opponent in the tree: engine nodes maximize, opponent
+       nodes take the expectation over the model's move distribution, and replies are trimmed
+       by probability-class coverage rather than rank so the truncation stays unbiased.`,
+      `Bayesian in-game inference: a posterior over opponent hypotheses updated from each
+       observed move through the family's exact likelihoods, reading only the moves themselves
+       and never the name of the family it is playing.`,
+      `An offline maximum-likelihood fitter that estimates opponent parameters from game
+       records, self-tested by requiring it to recover known parameters from games the models
+       generated themselves.`,
+      `A two-prover forced-selfmate oracle: an exhaustive prover entitled to refutations, and
+       a deeper forcing-restricted prover whose failures are reported as ignorance and never
+       laundered into disproofs.`,
+      `Evaluation discipline borrowed from machine learning: held-out opponent families with
+       frozen parameters, generalization claims that cite held-out rows only, and equal
+       billing for the worst family and the mean.`,
     ],
-    tech: ['Python', 'python-chess', 'PyPy', 'Stockfish (UCI)', 'Docker'],
+    tech: ['Python', 'python-chess', 'PyPy', 'Docker', 'Lichess Bot API'],
     stats: [
-      { value: '3', label: 'move-selection tiers' },
-      { value: '9', label: 'documented tuning versions' },
-      { value: '~1.4k', label: 'lines of Python' },
+      { value: '7', label: 'parametric opponent families' },
+      { value: '10', label: 'outcome labels in the ledger' },
+      { value: '~20k', label: 'lines of Python' },
+      { value: '8.4k', label: 'lines of tuning-log notes' },
     ],
-    links: [{ label: 'Source on GitHub', url: 'https://github.com/Seistrei/chess-losebot' }],
+    links: [
+      { label: 'Source on GitHub', url: 'https://github.com/Seistrei/chess-losebot' },
+      { label: 'Challenge it on Lichess', url: 'https://lichess.org/@/LoseBotAI' },
+    ],
     featured: false,
   },
   {
