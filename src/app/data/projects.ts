@@ -26,6 +26,112 @@ export interface Project {
 
 export const PROJECTS: readonly Project[] = [
   {
+    slug: 'jwst-operational-displays',
+    name: 'JWST Operational Displays',
+    category: 'Mission Operations',
+    tagline: 'Browser-based displays used by James Webb Space Telescope operators',
+    summary: `Professional work at RTX: modernizing the operational displays used by James Webb
+      Space Telescope operators, from desktop software originally written in the 2000s into
+      browser-based Angular applications. Seven legacy displays modernized and three new
+      operational components built, delivered end to end across Angular frontends and Java
+      services.`,
+    overview: [
+      `The James Webb Space Telescope is operated through a suite of operational displays, much
+       of it first written for desktop systems in the 2000s, when JWST was still in its planning
+       phase. That software was still in service when the telescope launched in 2021. At RTX I
+       worked on the effort replacing it, modernizing the displays into browser-based Angular
+       applications used by JWST operators.`,
+      `I modernized seven legacy displays and built three new major operational components: a
+       monitor for activity events from the observatory, a viewer for a queue of commands, and a
+       display operators use to watch the health of the application's connection to its server.
+       The work regularly crossed the stack boundary: the browser applications needed backend
+       interfaces that did not exist yet, so I added them to the Java-based Windows services
+       that supply the data.`,
+      `The hardest problems were reliability problems. JWST telemetry arrives in bursts, and a
+       single display is expected to keep up with roughly a thousand new table entries per
+       second. I redesigned the communication between the application and its Web Workers to
+       eliminate race conditions that could leave displays stuck loading or showing inconsistent
+       data, and refactored a high-volume plotting component to drop unnecessary chart updates
+       so displays stay responsive during those bursts.`,
+      `This is professional work on an operational program, so unlike the personal projects on
+       this site there is no public repository or live demo. Everything here is described at the
+       same level of detail as my resume.`,
+    ],
+    highlights: [
+      `Modernized seven operational displays, originally desktop applications from the 2000s,
+       into browser-based Angular applications used by JWST operators.`,
+      `Designed and built three new major operational components: an activity-event monitor, a
+       command-queue viewer, and a connection-health display operators use to confirm the
+       application's link to its server.`,
+      `Redesigned communication between the application and its Web Workers to eliminate race
+       conditions that left displays stuck loading or produced inconsistent data.`,
+      `Refactored a high-volume plotting component to reduce unnecessary chart updates and keep
+       displays responsive during bursts of telemetry.`,
+      `Delivered data-viewing features end to end, adding the backend interfaces the browser
+       applications required to the Java-based Windows services behind them.`,
+    ],
+    tech: ['Angular', 'TypeScript', 'RxJS', 'Web Workers', 'Java'],
+    stats: [
+      { value: '7', label: 'legacy displays modernized' },
+      { value: '3', label: 'new operational components' },
+      { value: '~1,000', label: 'new table rows per second' },
+      { value: '2000s', label: 'era of the software replaced' },
+    ],
+    links: [],
+    featured: true,
+  },
+  {
+    slug: 'ground-systems-framework',
+    name: 'Ground-Systems Visualization Framework',
+    category: 'Angular Framework',
+    tagline: 'A reusable Angular framework behind satellite data displays across RTX',
+    summary: `Professional work at RTX, and my current focus: a reusable Angular 20 framework of
+      20+ components and APIs that 10+ RTX programs use to build browser-based satellite data
+      displays. I develop and maintain the framework, led its migration from Angular 18 to
+      Angular 20, and cut Largest Contentful Paint by 55% across the production applications
+      built on it.`,
+    overview: [
+      `Satellite ground systems across RTX need browser-based data displays, and rather than
+       every program building its own, more than ten of them build on a shared visualization
+       framework of 20+ reusable components and APIs. I develop and maintain that framework.
+       The appeal of framework work is leverage: every new component, fix, and optimization
+       lands in every application built on it.`,
+      `Most of my time in the framework goes to optimization, reworks, and modernization. I
+       introduced lazy loading for components that were previously loaded at startup, which
+       reduced Largest Contentful Paint by 55% across production applications built with the
+       framework, moved its Web Worker layer onto Angular's first-class worker tooling, and
+       landed a series of smaller optimizations across the component catalog.`,
+      `I led the framework's migration from Angular 18 to Angular 20, including adopting
+       zoneless change detection in its reference application and automated test environment. A
+       framework migration is different from an application migration: every consuming program
+       inherits the change, so it has to land without breaking any of them.`,
+      `This is proprietary professional software, so there is no public repository. It is
+       described here at the same level of detail as my resume.`,
+    ],
+    highlights: [
+      `Reduced Largest Contentful Paint by 55% across production applications built with the
+       framework by introducing lazy loading for components that were previously loaded at
+       startup.`,
+      `Led the framework's migration from Angular 18 to Angular 20, including the adoption of
+       zoneless change detection in its reference application and automated test environment.`,
+      `Moved the framework's Web Worker layer onto Angular's official worker tooling, including
+       the webWorkerTsConfig build integration and the extra handling a reusable library needs
+       compared to an application.`,
+      `Added new UI components to the catalog, including overlay, autocomplete, and dialog
+       components, plus features delivered inside larger ones, such as searchable component
+       lists.`,
+    ],
+    tech: ['Angular 20', 'TypeScript', 'RxJS', 'Web Workers', 'Zoneless Change Detection'],
+    stats: [
+      { value: '20+', label: 'components and APIs' },
+      { value: '10+', label: 'RTX programs served' },
+      { value: '55%', label: 'LCP reduction' },
+      { value: '18→20', label: 'Angular migration led' },
+    ],
+    links: [],
+    featured: false,
+  },
+  {
     slug: 'nykta',
     name: 'Nykta',
     category: 'AI Systems',
@@ -101,56 +207,6 @@ export const PROJECTS: readonly Project[] = [
         url: 'https://github.com/Seistrei/nykta-discord-bot',
       },
     ],
-    featured: true,
-  },
-  {
-    slug: 'overwatch-draft-mode',
-    name: 'Overwatch Roguelite Draft Mode',
-    category: 'Game Systems',
-    tagline: 'A 2v2 mode where teams draft escalating upgrades between every round',
-    summary: `A custom Overwatch game mode: after every round, each team drafts three upgrades
-      from a catalog of 41, ranging from rideable sky dragons to turret-building bots, and the
-      picks persist as teams swap sides throughout the match. About 3,800 lines of OverPy
-      compiling to 147 Workshop rules.`,
-    overview: [
-      `A 2v2 attack/defense mode built on Assault. Captures are fast, respawns are faster, and
-       when the point falls the teams swap sides and draft again. Each team picks a world upgrade
-       (a large gameplay gadget), a utility upgrade, and a stat upgrade from an in-world,
-       cursor-driven three-card menu. Every pick persists and stacks across rounds and side
-       swaps, so the final rounds play out with both teams heavily upgraded.`,
-      `The platform is the interesting constraint. The Overwatch Workshop has no functions, no
-       objects, and no additive stat stacking; there are only rules, arrays, and effect
-       primitives, with variables mapped to numbered engine slots. The mode is written in OverPy,
-       a Python-like language that compiles to Workshop rules, with a Dockerized build toolchain.`,
-      `Many upgrades are powered by scripted dummy bots: Ana turrets, a jumping Reinhardt, a
-       wall-building Mei, a D.Va that shadows you, a Mauga you can drive like a vehicle, and a
-       three-bot conga line that pulls nearby attackers into the dance.`,
-    ],
-    highlights: [
-      `Sky Dragon: a rideable flying serpent built entirely from effect spheres. A nine-segment
-       body is rebuilt every 50 ms with sine-wave animation, flight is velocity-based, and a
-       collision trick defeats the map's invisible air ceiling in both directions.`,
-      `Delta-tracked buff handlers: dedicated rules track applied-versus-target percentages and
-       apply only the difference, which emulates additive stat stacking on a platform that has
-       none and eliminated a family of double-apply bugs.`,
-      `A team-swap engine that snapshots both rosters before moving anyone (moving players
-       mutates the live arrays) and guards the capture-versus-timeout race with an explicit
-       reentrancy flag.`,
-      `Draft state is replayed from player variables at round start, and non-stackable upgrades
-       are automatically removed from future draws once owned.`,
-      `Concurrency discipline throughout: barriers hold the draft menu closed until both teams
-       finish re-applying upgrades, and ability loops abort the moment a player swaps teams.`,
-      `An adapted in-world cursor-menu engine renders the three-card draft interface with hover
-       feedback, drawn from positioned world text.`,
-    ],
-    tech: ['OverPy', 'Overwatch Workshop', 'Docker', 'PowerShell', 'Git'],
-    stats: [
-      { value: '41', label: 'draftable upgrades' },
-      { value: '147', label: 'compiled Workshop rules' },
-      { value: '~3.8k', label: 'lines of OverPy' },
-      { value: '135', label: 'source rules' },
-    ],
-    links: [{ label: 'Source on GitHub', url: 'https://github.com/Seistrei/overwatch-roguelite' }],
     featured: false,
   },
   {
