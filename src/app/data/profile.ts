@@ -51,7 +51,11 @@ export const ABOUT_PARAGRAPHS: readonly string[] = [
    during large bursts of telemetry.`,
   `Outside of work I build substantial personal projects. The largest is Nykta, an autonomous AI
    agent for Discord built as six event-driven Python microservices, with long-term memory,
-   a permission-gated autonomy system, voice interaction, and an Angular monitoring dashboard.`,
+   a permission-gated autonomy system, voice interaction, and an Angular monitoring dashboard.
+   Over the past year I have developed many of these projects using agentic coding tools,
+   primarily Claude Code. I pair these tools with typed contracts, automated tests, and
+   benchmarks so that faster iteration does not come at the expense of reliability or
+   maintainability.`,
   `I also write fantasy. I have completed a 90-page short story and am now writing a novel,
    Memory's Hourglass, set in a sunless world with two moons. This site's theme comes directly
    from that world: Rikt, the red lightmoon, shapes the light theme, and Rim, the darkmoon,

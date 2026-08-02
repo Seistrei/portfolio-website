@@ -19,12 +19,16 @@ export const SKILL_GROUPS: readonly SkillGroup[] = [
       'Pydantic',
       'pytest',
       'asyncio',
-      'LLM APIs',
+      'Claude, OpenAI & Gemini APIs',
       'Tool calling',
       'Agent orchestration',
       'Context management',
       'Memory systems',
     ],
+  },
+  {
+    title: 'AI-Assisted Development',
+    skills: ['Claude Code', 'OpenAI Codex', 'Cursor', 'Agentic workflows'],
   },
   {
     title: 'Backend & Data',

@@ -2,13 +2,17 @@
   <div class="container bar">
     <a class="brand" routerLink="/" aria-label="Heath Rohlman — home" (click)="menuOpen.set(false)">
       <svg viewBox="0 0 32 32" width="26" height="26" aria-hidden="true">
-        <polygon
-          points="16,2.5 27.7,9.25 27.7,22.75 16,29.5 4.3,22.75 4.3,9.25"
-          fill="currentColor"
-        />
-        <polygon points="16,8.5 22.5,12.25 22.5,19.75 16,23.5 9.5,19.75 9.5,12.25" class="inner" />
+        <g transform="rotate(-24 16 16)">
+          <path d="M 3 16 A 13 5.5 0 0 1 29 16" fill="none" stroke="currentColor" stroke-width="2.6" />
+        </g>
+        <circle class="planet" cx="16" cy="16" r="8" fill="currentColor" />
+        <g transform="rotate(-24 16 16)">
+          <path class="ring-casing" d="M 3 16 A 13 5.5 0 0 0 29 16" fill="none" stroke-width="5.6" />
+          <path d="M 3 16 A 13 5.5 0 0 0 29 16" fill="none" stroke="currentColor" stroke-width="2.6" />
+          <circle cx="29.4" cy="16" r="2.4" fill="currentColor" />
+        </g>
       </svg>
-      <span>heath rohlman</span>
+      <span>Heath Rohlman</span>
     </a>
 
     <nav class="links" aria-label="Primary">

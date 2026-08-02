@@ -38,8 +38,13 @@
     color: var(--text);
   }
 
-  .inner {
-    fill: var(--bg);
+  .planet {
+    stroke: var(--bg);
+    stroke-width: 2.4;
+  }
+
+  .ring-casing {
+    stroke: var(--bg);
   }
 
   &:hover {
