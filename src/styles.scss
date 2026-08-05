@@ -1,9 +1,11 @@
 /* ---------------------------------------------------------------------------
-   Design system — the two moons of "Memory's Hourglass".
-   Rim (default, dark): the darkmoon. Cold blue-black, silver and icy cyan,
-   soft white glows. Hushed and still.
-   Rikt (light): the red lightmoon. Warm cream cast red-amber, crimson and
-   ember and gold. This world's daylight is red-tinted.
+   Design system — the two moons of "Memory's Hourglass". Each theme is the
+   first-person view from its moon; the canvas moonscape draws the scene.
+   Rim (default, dark): inside the darkmoon's living darkness. No stars, no
+   horizon — heavy fog made of black, cold blue-black with silver and icy
+   cyan for what little can be seen.
+   Rikt (light): standing on the red lightmoon. Its elua is nearly liquid:
+   warm cream light cast red-amber, crimson and ember and gold.
    Fonts are loaded via angular.json (@fontsource-variable packages).
 --------------------------------------------------------------------------- */
 
@@ -23,12 +25,9 @@
   --accent-soft: rgba(143, 216, 234, 0.11);
   --star: #f2f7fb;
   --shadow: 0 18px 50px -18px rgba(0, 0, 0, 0.6);
-  --starfield-opacity: 1;
-  /* "Darkest day" light: a pale glow behind the night, like a bright light
-     behind a thick blanket, plus a faint cold answer at the horizon. */
-  --sky:
-    radial-gradient(58rem 42rem at 50% -14%, rgba(226, 236, 246, 0.075), transparent 66%),
-    radial-gradient(48rem 36rem at 86% 112%, rgba(143, 216, 234, 0.05), transparent 70%);
+  /* Inside Rim's darkness there is no sky at all. The canvas paints the
+     living fog; this near-black stands behind it until it loads. */
+  --sky: #030509;
 
   /* Type */
   --font-display: 'Space Grotesk Variable', 'Segoe UI', system-ui, sans-serif;
@@ -59,13 +58,13 @@
   --accent-soft: rgba(168, 62, 43, 0.1);
   --star: #a8531e;
   --shadow: 0 16px 40px -20px rgba(88, 38, 24, 0.35);
-  --starfield-opacity: 1;
-  /* Ambient light around the lightmoon in the right gutter (the canvas draws
-     the disc itself), answered by a gold wash from the opposite corner. On
-     narrow viewports the canvas skips the disc and this glow is the moon. */
+  /* The view from Rikt's surface: liquid light pouring down from overhead,
+     with a gold shimmer and the moon's red cast suffusing everything. */
   --sky:
-    radial-gradient(46rem 34rem at 92% 24%, rgba(196, 74, 48, 0.12), transparent 62%),
-    radial-gradient(50rem 38rem at 6% 108%, rgba(224, 168, 60, 0.08), transparent 68%);
+    radial-gradient(64rem 30rem at 50% -12%, rgba(255, 249, 238, 0.9), transparent 58%),
+    radial-gradient(40rem 26rem at 82% 4%, rgba(224, 168, 60, 0.1), transparent 65%),
+    radial-gradient(50rem 40rem at 18% 34%, rgba(196, 74, 48, 0.05), transparent 60%),
+    linear-gradient(180deg, #f9efe1 0%, #f6ead7 60%, #f2e3cb 100%);
 
   color-scheme: light;
 }

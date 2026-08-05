@@ -285,8 +285,8 @@ export const PROJECTS: readonly Project[] = [
     category: 'Web',
     tagline: 'This site, built as a working sample of modern Angular',
     summary: `Designed and built from scratch on Angular 22 with zoneless change detection,
-      signals for every piece of state, deferred views, view transitions, and a canvas starfield
-      that honors reduced-motion preferences.`,
+      signals for every piece of state, deferred views, view transitions, and a canvas scene
+      set on the two moons of the novel I am writing.`,
     overview: [
       `A small site, but built the way I build large ones: zoneless change detection with signals
        as the only state primitive, the current control-flow syntax throughout, lazy routes with
@@ -298,8 +298,10 @@ export const PROJECTS: readonly Project[] = [
     ],
     highlights: [
       `Zoneless with OnPush everywhere; state lives exclusively in signals and computed values.`,
-      `A canvas starfield with twinkling parallax stars and occasional shooting stars. It is
-       DPR-aware, paused while the tab is hidden, and static when reduced motion is preferred.`,
+      `A canvas moonscape that renders each theme from the surface of one of the two moons
+       from my novel: procedural living darkness on one, currents of liquid light on the
+       other, with rare, half-seen wildlife. It is DPR-aware, paused while the tab is hidden,
+       and static when reduced motion is preferred.`,
       `Scroll-spy navigation and reveal-on-scroll animations built on IntersectionObserver
        directives.`,
       `Self-hosted variable fonts, theme-aware meta tags, and a no-flash theme bootstrap script.`,
